@@ -1,0 +1,657 @@
+Program - 1
+
+% Red Blue and Green and Gray Components
+i=imread('cancercell.jpg');
+subplot(3,2,1); imshow(i); title('Original Image');
+%Red Component
+r=i(:,:,1);
+subplot(3,2,2); imshow(r);title('Red Component');
+%Green Component
+g=i(:,:,2);
+subplot(3,2,3); imshow(g); title('Green Component');
+CS4509- Digital image processing Laboratory Department of IT 2024-2025
+7St. Joseph’s Institute of Technology
+%Blue Component
+b=i(:,:,3);
+subplot(3,2,4); imshow(b); title('Blue Component');
+%Color to Gray Image
+rg=rgb2gray(i);
+subplot(3,2,5); imshow(rg); title('Gray Image');
+Complement, Converting and Simulation of an Image
+% Display color Image, find its complement and convert to gray scale
+I=imread('cancercell.jpg');
+subplot(2,2,1); imshow(I); subimage(I);
+title('Color Image');
+c=imcomplement(I);
+subplot(2,2,2); imshow(c); subimage(c);
+title('Complement of color Image');
+r=rgb2gray(I);
+subplot(2,2,3); imshow(r); subimage(r);
+title('Gray scale of color Image');
+%Complement of Gray Image
+b=imcomplement(r);
+subplot(2,2,4); imshow(b); subimage(b);
+title('Complement of Gray Image');
+%Simulation of an Image (Arithmetic & Logic Operation)
+a=ones(40); b=zeros(40); c=[a b;b
+a]; d=[b b;a a]; A=10*(c+d);
+M=c.*d;
+S=c-d; D=c/4; figure;
+subplot(3,2,1); imshow(c);
+subplot(3,2,2); imshow(d);
+subplot(3,2,3); imshow(A);
+subplot(3,2,4); imshow(M);
+subplot(3,2,5); imshow(S);
+subplot(3,2,6); imshow(D)
+
+Program - 2
+% To find Neighbour of a given Pixel
+a=magic(5);
+disp(‘a=’); disp(a);
+b=input('Enter the row < size of the Matrix');
+c=input(' Enter the Column < size of matrix');
+disp(‘Element’); disp(a(b,c));
+% 4 Point Neighbour
+N4=[a(b+1,c), a(b-1,c), a(b,c+1), a(b,c-1)];
+disp(‘N4=’); disp(N4);
+%8 Point Neighbour
+N8=[a(b+1,c), a(b-1,c), a(b,c+1), a(b,c-1), a(b+1,c+1), a(b+1,c-1), a(b-1,c-1), a(b-1,c+1)];
+disp(‘N8=’); disp(N8);
+%Diagonal Neighbour
+ND=[ a(b+1,c+1), a(b+1,c-1), a(b-1,c-1), a(b-1,c+1)];
+disp(‘ND=’); disp(ND);
+OUTPUT:
+>> pixel
+17 24 1 8 15
+23 5 7 14 16
+4 6 13 20 22
+10 12 19 21 3
+11 18 25 2 9
+Enter the row < size of the Matrix 3
+CS4509- Digital image processing Laboratory Department of IT 2024-2025
+10St. Joseph’s Institute of Technology
+Enter the Column < size of matrix 2
+N4:
+12 5 13 4
+N8:
+12 5 13 4 19 10 23 7
+ND:
+19 10 23 7
+
+Program - 3 IMAGES WITH DIFFERENT COLOR MODELS
+
+% Load an image
+originalImage = imread('image.jpg'); % Replace 'image.jpg' with the image filename
+% Display the original image
+figure;
+subplot(2, 2, 1);
+imshow(originalImage);
+title('Original Image');
+% Convert the image to RGB
+rgbImage = originalImage;
+% Display the RGB image
+subplot(2, 2, 2);
+imshow(rgbImage);
+title('RGB Image');
+% Conversion to HSL (Custom function required)
+% hslImage = rgb2hsl_custom(rgbImage);
+% Display the HSL image
+% subplot(2, 2, 3);
+% imshow(hsl2rgb_custom(hslImage));
+% title('HSL Image');
+% Conversion to CMYK (Custom function required)
+% cmykImage = rgb2cmyk_custom(rgbImage);
+% Display the CMYK image
+% subplot(2, 2, 4);
+% imshow(cmyk2rgb_custom(cmykImage));
+% title('CMYK Image');
+% Analyze color-based features
+St. Joseph’s Institute of Technology
+11CS4509- Digital image processing Laboratory
+Department of IT
+2024-2025
+% Dominant colors in RGB
+rgbDominantColor = calculateDominantColor(rgbImage);
+fprintf('Dominant color in RGB: R=%d, G=%d, B=%d\n', rgbDominantColor(1),
+rgbDominantColor(2), rgbDominantColor(3));
+% % Dominant colors in HSL (Custom function required)
+% hslDominantColor = calculateDominantColor(hsl2rgb_custom(hslImage));
+% fprintf('Dominant color in HSL: R=%d, G=%d, B=%d\n', hslDominantColor(1),
+hslDominantColor(2), hslDominantColor(3));
+% % Dominant colors in CMYK (Custom function required)
+% cmykDominantColor = calculateDominantColor(cmyk2rgb_custom(cmykImage));
+% fprintf('Dominant color in CMYK: R=%d, G=%d, B=%d\n', cmykDominantColor(1),
+cmykDominantColor(2), cmykDominantColor(3));
+% Calculate and plot color histograms
+rgbHistogram = calculateColorHistogram(rgbImage);
+% hslHistogram = calculateColorHistogram(hsl2rgb_custom(hslImage));
+% cmykHistogram = calculateColorHistogram(cmyk2rgb_custom(cmykImage));
+% Plot RGB histogram
+figure;
+subplot(3, 1, 1);
+bar(rgbHistogram, 'r');
+title('RGB Histogram');
+% % Plot HSL histogram
+% subplot(3, 1, 2);
+% bar(hslHistogram, 'g');
+% title('HSL Histogram');
+% % Plot CMYK histogram
+% subplot(3, 1, 3);
+% bar(cmykHistogram, 'b');
+% title('CMYK Histogram');
+% Function to calculate dominant color (implementation required)
+% % Custom RGB to HSL conversion function
+% function hslImage = rgb2hsl_custom(rgbImage)
+% % Implement RGB to HSL conversion here
+% end
+% % Function to calculate dominant color
+function dominantColor = calculateDominantColor(image)
+% Convert the image to double precision
+doubleImage = im2double(image);
+% Reshape the image into a 2D array of RGB values
+St. Joseph’s Institute of Technology
+12CS4509- Digital image processing Laboratory
+Department of IT
+[height, width, ~] = size(doubleImage);
+reshapedImage = reshape(doubleImage, height * width, 3);
+% Perform k-means clustering (change k to the desired number of clusters)
+k = 5; % You can adjust this value
+[clusterIndices, ~] = kmeans(reshapedImage, k);
+% Find the largest cluster (i.e., the dominant color)
+clusterCounts = hist(clusterIndices, 1:k);
+[~, dominantCluster] = max(clusterCounts);
+% Calculate the RGB values of the dominant color
+dominantColor = mean(reshapedImage(clusterIndices == dominantCluster, :), 1);
+end
+% % Function to calculate color histograms
+function colorHistogram = calculateColorHistogram(image)
+% Convert the image to double precision
+doubleImage = im2double(image);
+% Separate the RGB channels
+redChannel = doubleImage(:, :, 1);
+greenChannel = doubleImage(:, :, 2);
+blueChannel = doubleImage(:, :, 3);
+% Define the number of bins for the histogram
+numBins = 256; % You can adjust this value as needed
+% Calculate histograms for each channel
+redHist = imhist(redChannel, numBins);
+greenHist = imhist(greenChannel, numBins);
+blueHist = imhist(blueChannel, numBins);
+% Combine the individual histograms into a single histogram
+colorHistogram = [redHist, greenHist, blueHist];
+% Normalize the histogram to have values between 0 and 1
+colorHistogram = colorHistogram / sum(colorHistogram);
+% Plot the color histogram (optional)
+figure;
+subplot(2, 1, 1);
+bar(colorHistogram);
+title('Color Histogram');
+% Plot individual channel histograms (optional)
+subplot(2, 1, 2);
+bar(redHist, 'r');
+
+bar(greenHist, 'g');
+bar(blueHist, 'b');
+title('Channel Histograms');
+
+Program - 4 Transformation of an Image
+
+%Scaling & Rotation
+% Scaling (Resize)
+I=imread('earcell.jpg');
+subplot(2,2,1); subimage(I); title('Original Image');
+s=input('Enter Scaling Factor');
+j=imresize(I,s);
+subplot(2,2,2); subimage(j); title('Scaled Image');
+% Rotation
+K=imrotate(j,60);
+subplot(2,2,3); imshow(K); title('Rotated Image 60deg');
+R=imrotate(j,45);
+subplot(2,2,4); imshow(R); title('Rotated Image 45deg');
+%Display the color image and its Resized images by different methods
+%Display the color image
+I=imread('embryo.jpg'); figure,
+subplot(2,2,1);
+subimage(I);
+title('Original Image');
+%Display Resized image by Bilinear method
+B=imresize(I,5);
+subplot(2,2,2); subimage(B);
+title('Bilinear Image');
+%Display Resized image by Nearest method
+C=imresize(I,5,'nearest');
+subplot(2,2,3); subimage(C);
+title('Nearest Image');
+%Display Resized image by Bicubic method
+D=imresize(I,5,'Bicubic');
+subplot(2,2,4); subimage(D);
+title('Bicubic Image');
+
+Program - 5 HISTOGRAM PROCESSING AND BASIC THRESHOLDING FUNCTIONS
+
+clc;
+clear
+all;
+close
+all;
+a = rgb2gray(imread('image.jpg'));
+[m, n] = size(a);
+no = 0:255;
+count = 0;
+for z=1:256
+for i=1:m
+for j=1:n
+if a(i, j) == z-1;
+count = count + 1;
+end
+end
+end
+t(z) = count;
+count = 0;
+end
+figure;
+imshow(a)
+title('Original image')
+figure;
+stem(no, t)
+grid on;
+xlabel('Intesity levels')
+ylabel('No. of pixels')
+title('Histogram of the image')
+%Histogram equalization
+clc
+clear
+all
+close
+all
+a = rgb2gray(imread('image.jpg'));
+[m, n] = size(a);
+no_of_pixels = m*n;
+figure;
+imshow(a)
+title('Original image')
+h_im = uint8(zeros(m, n));
+count = zeros(256, 1);
+probf = zeros(256, 1);
+St. Joseph’s Institute of Technology
+19
+2024-2025CS4509- Digital image processing Laboratory
+Department of IT
+probc = zeros(256, 1);
+cdf = zeros(256, 1);
+output = zeros(1, 256);
+no = 1:256;
+for i=1:m
+for j=1:n
+value = a(i, j);
+count(value + 1) = count(value + 1) + 1;
+probf(value + 1) = count(value +1/no_of_pixels;
+end
+end
+figu
+re;
+stem(no, probf)
+title('Probability distribution function')sum = 0;
+b = 255;
+for i=1:size(probf)
+sum = sum + count(i);
+cdf(i) = sum;
+probc(i) = cdf(i)/no_of_pixels;
+output(i) = round(probc(i) * b);
+end
+figu
+re;
+stem(no, output)
+title('Rounded off CDF*(L-1)')
+for i=1:m
+for j=1:n
+h_im(i, j) = output(a(i, j) + 1);
+end
+end
+figure; imshow(h_im)
+title('Histogram equalization')
+% Thresholding the original image using Otsu's method
+a = rgb2gray(imread('image.jpg'));
+level = graythresh(a);
+B = imbinarize(a, level);
+subplot(1, 2, 1) imshow(uint8(a))
+subplot(1, 2, 2) imshow(B)
+
+PROGRAM - 6 COMPUTATION OF MEAN, STANDARD DEVIATION, CORRELATION COEFFICIENT OF THE GIVEN IMAGE
+
+i=imread('cancercell.jpg');
+subplot(2,2,1);
+imshow(i);
+title('Original Image');
+g=rgb2gray(i);
+subplot(2,2,2); imshow(g);
+title('Gray Image');
+c=imcrop(g);
+subplot(2,2,3); imshow(c);
+title('Cropped Image');
+m=mean2(c);disp('m'); disp(m);
+s=std2(c); disp('s'); disp(s);
+figure, k=(checkerboard>0.8);
+subplot(2,1,1); imshow(k);
+title('Image1');
+k1=(checkerboard>0.5);
+subplot(2,1,2); imshow(k1);
+title('Image2');
+r=corr2(k,k1);
+disp('r');disp(r);
+
+PROGRAM - 7 IMPLEMENTATION OF IMAGE ENHANCEMENT-SPATIAL FILTERING
+
+% Load the image
+originalImage = imread('image2.jpg'); % the image filename
+% Convert the image to double precision for better processing
+originalImage = im2double(originalImage);
+% Define the filter kernel (averaging filter)
+filterSize = 3; % Size of the filter kernel (e.g., 3x3)
+filter = ones(filterSize) / filterSize^2;
+% Apply the filter using convolution
+enhancedImage = imfilter(originalImage, filter, 'replicate'); % 'replicate' padding to handle
+image borders
+% Display the original and enhanced images
+subplot(1, 2, 1);
+imshow(originalImage);
+title('Original Image');
+subplot(1, 2, 2);
+imshow(enhancedImage);
+title('Enhanced Image');
+% Save the enhanced image if needed
+% imwrite(enhancedImage, 'enhanced_image.jpg');
+
+PROGRAM - 8 IMPLEMENTATION OF IMAGE ENHANCEMENT- FILTERING IN FREQUENCY DOMAIN
+
+clc
+clear all
+close all
+a = imresize(imread('image.jpg’), [256, 256]);
+m, n] = size(a);
+mask = zeros(m, n);
+for i=113:143
+for j=113:143
+mask(i, j) = 1;
+end
+end
+b = fftshift(fft2(a));
+d = b .* mask;
+e = abs(ifft2(d));
+subplot(2, 2, 1)
+imshow(a)
+title('Orginal image')
+subplot(2, 2, 2) imshow(uint8(e))
+title('Low-pass filter filtered image')
+subplot(2, 2, 3)
+imshow(mask)
+title('Low-pass filter mask')
+
+program - 9 IMAGE SEGMENTATION – EDGE
+DETECTION, LINE DETECTIO
+
+% Load the image
+inputImage = imread('your_image.jpg');
+% Edge Detection using Canny
+edgeImage = edge(rgb2gray(inputImage), 'Canny');
+% Line Detection using Hough Transform
+St. Joseph’s Institute of Technology
+29CS4509- Digital image processing Laboratory
+Department of IT
+[H, theta, rho] = hough(edgeImage);
+peaks = houghpeaks(H, 10); % Adjust the number of peaks as needed
+lines = houghlines(edgeImage, theta, rho, peaks);
+% Point Detection using the Harris corner detector
+corners = detectHarrisFeatures(rgb2gray(inputImage));
+% Display the results
+figure;
+subplot(2, 2, 1);
+imshow(inputImage);
+title('Original Image');
+subplot(2, 2, 2);
+imshow(edgeImage);
+title('Edge Detection (Canny)');
+subplot(2, 2, 3);
+imshow(inputImage);
+hold on;
+for k = 1:length(lines)
+xy = [lines(k).point1; lines(k).point2];
+plot(xy(:,1), xy(:,2), 'LineWidth', 2, 'Color', 'red');
+end
+title('Line Detection (Hough Transform)');
+subplot(2, 2, 4);
+imshow(inputImage);
+hold on;
+plot(corners.selectStrongest(50));
+title('Point Detection (Harris Corners)');
+% Save the images if needed
+imwrite(edgeImage, 'edge_detection.jpg');
+imwrite(inputImage, 'line_detection.jpg');
+imwrite(inputImage, 'point_detection.jpg');
+
+PROGRAM 10 
+
+IMPLEMENTATION OF REGION BASED
+SEGMENTATION
+
+% Read the input image
+inputImage = imread('clock.jpg');
+% Define a seed point (you can choose this point manually)
+seedPoint = [100, 100]; % [row, column]
+% Set the intensity similarity threshold
+intensityThreshold = 20;
+% Initialize the segmented image
+segmentedImage = zeros(size(inputImage));
+% Create a stack for region growing
+stack = [];
+stack = [stack; seedPoint];
+% Define the region mean and region size
+regionMean = double(inputImage(seedPoint(1), seedPoint(2)));
+regionSize = 1;
+% Define connectivity for 8-connected neighbors
+connectivity = [-1, -1; -1, 0; -1, 1; 0, -1; 0, 1; 1, -1; 1, 0; 1, 1];
+% Region growing loop
+while ~isempty(stack)
+currentPoint = stack(1, :);
+stack(1, :) = [];
+for i = 1:8
+neighbor = currentPoint + connectivity(i, :);
+if neighbor(1) > 0 && neighbor(1) <= size(inputImage, 1) && neighbor(2) > 0 &&
+neighbor(2) <= size(inputImage, 2)
+if segmentedImage(neighbor(1), neighbor(2)) == 0 &&
+abs(double(inputImage(neighbor(1), neighbor(2))) - regionMean) <= intensityThreshold
+regionSize = regionSize + 1;
+regionMean = (regionMean * (regionSize - 1) + double(inputImage(neighbor(1),
+neighbor(2)))) / regionSize;
+stack = [stack; neighbor];
+segmentedImage(neighbor(1), neighbor(2)) = 1;
+end
+end
+end
+end
+% Display the segmented image
+figure;
+subplot(1, 2, 1);
+imshow(inputImage);
+title('Original Image');
+subplot(1, 2, 2);
+imshow(segmentedImage, []);
+title('Segmented Image');
+% You can save the segmented image if needed
+imwrite(segmentedImage, 'segmented_image.jpg');
+
+PROGRAM 12
+BASIC MORPHOLOGICAL OPERATIONS
+
+clc
+clear all
+close all
+I = rgb2gray(imread('image.jpg'));
+subplot(2, 3, 1)
+imshow(I)
+title('Original image')
+%Edge detection and binary image
+[~, threshold] = edge(I, 'sobel');
+fudgeFactor = 0.5;
+BWs = edge(I, 'sobel', threshold *fudgeFactor);
+%Display the resulting binary gradient mask
+subplot(2, 3, 2)
+imshow(BWs)
+title('Binary Gradient Mask')
+%imdilate
+se90 = strel('line', 3, 90);
+se0 = strel('line', 3, 0);
+BWsdil = imdilate(BWs, [se90, se0]);
+subplot(2, 3, 3)
+imshow(BWsdil)
+title('Dilated Gradient Mask')
+St. Joseph’s Institute of Technology
+34CS4509- Digital image processing Laboratory
+Department of IT
+BWdfill = imfill(BWsdil, 'holes');
+subplot(2, 3, 4)
+imshow(BWdfill)
+title('Binary image with filled holes')
+BWnobord = imclearborder(BWdfill, 4);
+subplot(2, 3, 5)
+imshow(BWnobord)
+title('Cleared Border Image')
+seD = strel('diamond', 1);
+BWfinal = imerode(BWnobord, seD);
+BWfinal = imerode(BWfinal, seD);
+subplot(2, 3, 6)
+imshow(BWfinal)
+title('Segmented Image (imerode)')
+%Remove inner elements
+BW2 = bwmorph(BWfinal, 'remove');
+figure;
+subplot(2, 2, 1)
+imshow(BW2)
+title('Image with outline')
+%Skeleton image
+BW3 = bwmorph(BWfinal, 'skel', Inf);
+subplot(2, 2, 2)
+imshow(BW3)
+title('Skeleton')
+subplot(2, 2, 3) imshow(labeloverlay(I,
+BWfinal)) title('Mask over original image')
+BWoutline = bwperim(BWfinal); Segout = I;
+Segout(BWoutline) = 255;
+subplot(2, 2, 4)
+imshow(Segout)
+title('Outlined original image')
+%Opening and closing
+originalBW = I; figure;
+subplot(2, 2, 1)
+imshow(originalBW)
+title('Original')
+se = strel('disk', 10);
+closeBW = imclose(originalBW, se);
+subplot(2, 2, 2)
+imshow(closeBW, [])
+title('imclose')
+original = I;
+subplot(2, 2, 3)
+imshow(original)
+title('Original')
+se = strel('disk', 20);
+afterOpening = imopen(original, se);
+subplot(2, 2, 4)
+St. Joseph’s Institute of Technology
+35
+2024-2025CS4509- Digital image processing Laboratory
+Department of IT
+imshow(afterOpening, [])
+title('imopen')
+
+PROGRAM 12
+IMPLEMENTATION OF IMAGE
+COMPRESSION TECHNIQUES
+
+%nearer values are retained apart from DC component
+clc
+clear
+all
+close
+all
+a = rgb2gray(imread('image.jpg'));
+figure;
+subplot(1, 2, 1)
+imshow(a)
+title('Original image')
+[m, n] = size(a);
+bs = 8;
+Q = 20 * ones(bs);
+Q(1, 1) = 10;
+Rec_a = zeros(size(a));
+for i=1:bs:(m-bs+1)
+for j=1:bs:(n-bs+1)
+block = a(i:i+bs-1, j:j+bs-1);
+block_D = dct2(block);
+block_Q = round(block_D./Q);
+d = block_Q.*Q;
+Rec_a(i:i+bs-1, j:j+bs-1) = idct2(d);
+end
+end
+subplot(1, 2, 2)
+imshow(uint8(Rec_a))
+title('Reconstructed image')
+MSE = sum(sum((uint8(a)-uint8(Rec_a)).^2))/(m*n)
+% set all components to zero except the DC component
+clc
+clear
+all
+close
+all
+a = rgb2gray(imread('D:\College\DIP\Lab\Lab8\image.jpg'));
+figure;
+subplot(1, 2, 1)
+imshow(a)
+title('Original image')
+[m, n] = size(a);
+bs = 8;
+Q = 20 * ones(bs);
+Q(1, 1) = 10;
+Rec_a = zeros(size(a));
+for i=1:bs:(m-bs+1)
+for j=1:bs:(n-bs+1)
+block = a(i:i+bs-1, j:j+bs-1);
+St. Joseph’s Institute of Technology
+38
+2024-2025CS4509- Digital image processing Laboratory
+Department of IT
+block_D = dct2(block);
+d = zeros(size(block_D));
+d(1, 1) = block_D(1, 1);
+Rec_a(i:i+bs-1, j:j+bs-1) = idct2(d);
+end
+end
+subplot(1, 2, 2)
+imshow(uint8(Rec_a))
+title('Reconstructed image')
+MSE = sum(sum((uint8(a)-uint8(Rec_a)).^2))/(m*n)
+% specify how many elements are to be retained
+clc
+clear all
+close all
+a = rgb2gray(imread('D:\College\DIP\Lab\Lab8\image.jpg'));
+k = input("Enter the number of values to be retained:");
+figure; subplot(1,
+2, 1)imshow(a)
+title('Original image');
+[m, n]=size(a);
+bs = 8;
+Rec_a = zeros(size(a));for
+i=1:bs:(m-bs+1)
+for j=1:bs:(n-bs+1)
+block = a(i:i+bs-1, j:j+bs-1);
+block_D = dct2(block);
+d = zeros(size(block_D));
+d(1:k, 1:k) = block_D(1:k, 1:k);
+Rec_a(i:i+bs-1, j:j+bs-1) = idct2(d);
+end
+end
+subplot(1, 2, 2)
+imshow(uint8(Rec_a))
+title('Reconstructed image');
+MSE = sum(sum((uint8(a)-uint8(Rec_a)).^2))/(m*n)
